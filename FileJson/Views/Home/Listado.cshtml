@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Empresa>
+
+
+<h1>Listado de Registros</h1>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Pais</th>
+            <th>Sucursal</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var empresa in Model)
+        {
+            <tr>
+                <td>@empresa.Id</td>
+                <td>@empresa.Nombre</td>
+                <td>@empresa.Pais</td>
+                <td>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Direccion</th>
+                                <th>Telefono</th>
+                                <th>Colaborador</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var sucursal in empresa.Sucursales)
+                            {
+                                <tr>
+                                    <td>@sucursal.Id</td>
+                                    <td>@sucursal.Nombre</td>
+                                    <td>@sucursal.Direccion</td>
+                                    <td>@sucursal.Telefono</td>
+                                    <td>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Nombre</th>
+                                                    <th>CUI</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var colaborador in sucursal.Colaboradores)
+                                                {
+                                                    <tr>
+                                                        <td>@colaborador.Id</td>
+                                                        <td>@colaborador.Nombre</td>
+                                                        <td>@colaborador.Cui</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Editar" asp-route-id="@empresa.Id">Editar</a> |
+                    <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@empresa.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

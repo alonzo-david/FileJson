@@ -1,0 +1,60 @@
+﻿@model Empresa
+
+<form asp-action="Editar">
+    <div class="form-group row">
+        <h2>Empresa</h2>
+        <input type="hidden" asp-for="Id" />
+        <div class="col-6">
+            <label for="Nombre">Nombre</label>
+            <input type="text" class="form-control" asp-for="Nombre">
+        </div>
+        <div class="col-6">
+            <label for="Pais">Pais</label>
+            <input type="text" class="form-control" asp-for="Pais">
+        </div>
+
+        <hr />
+
+        <div style="margin: 1em 0 0 3em;">
+            <div class="row">
+                @for (int i = 0; i < Model.Sucursales.Count; i++)
+                {
+                    <h4>Sucursal @Model.Sucursales[i].Id </h4>
+                    <input type="hidden" asp-for="Sucursales[i].Id" />
+                    <input type="hidden" asp-for="Sucursales[i].IdEmpresa" />
+                    <div class="col-4">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" class="form-control" asp-for="Sucursales[i].Nombre">
+                    </div>
+                    <div class="col-4">
+                        <label for="Direccion">Direccion</label>
+                        <input type="text" class="form-control" asp-for="Sucursales[i].Direccion">
+                    </div>
+                    <div class="col-4">
+                        <label for="Telefono">Telefono</label>
+                        <input type="text" class="form-control" asp-for="Sucursales[i].Telefono">
+                    </div>
+                    <div style="margin: 1em 0 0 3em;">
+                        <div class="row">
+                            @for (int j = 0; j < Model.Sucursales[i].Colaboradores.Count; j++)
+                            {
+                                <h5>Colaborador @Model.Sucursales[i].Colaboradores[j]</h5>
+                                <input type="hidden" asp-for="Sucursales[i].Colaboradores[j].Id" />
+                                <input type="hidden" asp-for="Sucursales[i].Colaboradores[j].IdSucursal" />
+                                <div class="col-4">
+                                    <label for="Nombre">Nombre</label>
+                                    <input type="text" class="form-control" asp-for="Sucursales[i].Colaboradores[j].Nombre">
+                                </div>
+                                <div class="col-4">
+                                    <label for="CUI">CUI</label>
+                                    <input type="text" class="form-control" asp-for="Sucursales[i].Colaboradores[j].Cui">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

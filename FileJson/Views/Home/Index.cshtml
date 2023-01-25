@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenido!</h1>
+    <p>Suba un archivo tipo JSON para cargar datos.</p>
+    <br /><br /><br /><br /><br /><br />
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <button type="submit">Upload File</button>
+    </form>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert" style="margin-top:20px">
+            @ViewBag.Message
+        </div>
+    }
+</div>
